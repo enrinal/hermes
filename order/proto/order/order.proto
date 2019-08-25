@@ -1,5 +1,4 @@
-// shippy-service-consignment/proto/consignment/consignment.proto
-syntax = "proto3";
+// order-service/proto/order/order.protosyntax = "proto3";
 
 package order; 
 
