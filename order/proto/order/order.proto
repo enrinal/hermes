@@ -23,5 +23,5 @@ message Item {
 
 message Response {
     bool created = 1;
-    Order consignment = 2;
+    Order order = 2;
 }
