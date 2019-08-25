@@ -5,6 +5,7 @@ package order;
 
 service OrderService {
   rpc CreateOrder(Order) returns (Response) {}
+  rpc GetOrders(GetRequest) returns (Response) {}
 }
 
 message Order {
@@ -21,7 +22,10 @@ message Item {
   string name = 3;
 }
 
+message GetRequest {}
+
 message Response {
   bool created = 1;
   Order order = 2;
+  repeated Order orders = 3;
 }

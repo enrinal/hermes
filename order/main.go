@@ -19,6 +19,7 @@ const (
 
 type repository interface {
 	Create(*pb.Order) (*pb.Order, error)
+	GetAll() []*pb.Order
 }
 
 // Repository - Dummy repository, this simulates the use of a datastore
@@ -35,6 +36,10 @@ func (repo *Repository) Create(order *pb.Order) (*pb.Order, error) {
 	repo.orders = updated
 	repo.mu.Unlock()
 	return order, nil
+}
+
+func (repo *Repository) GetAll() []*pb.Order {
+	return repo.orders
 }
 
 // Service should implement all of the methods to satisfy the service
@@ -59,6 +64,11 @@ func (s *service) CreateOrder(ctx context.Context, req *pb.Order) (*pb.Response,
 	// Return matching the `Response` message we created in our
 	// protobuf definition.
 	return &pb.Response{Created: true, Order: order}, nil
+}
+
+func (s *service) GetOrders(ctx context.Context, req *pb.GetRequest) (*pb.Response, error) {
+	orders := s.repo.GetAll()
+	return &pb.Response{Orders: orders}, nil
 }
 
 func main() {
