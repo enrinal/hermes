@@ -3,7 +3,7 @@ syntax = "proto3";
 
 package order; 
 
-service ShippingService {
+service OrderService {
   rpc CreateOrder(Order) returns (Response) {}
 }
 
